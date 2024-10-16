@@ -4,8 +4,8 @@ const Patinador = require('../models/patinador.model');
 const Evento = require('../models/evento.model');
 const {authMiddleware} = require('../middleware/auth.middleware');
 
-// Obtener todos los patinadores
-router.get('/', authMiddleware, async (req, res) => {
+// Obtener todos los patinadores (authMiddleware)
+router.get('/', async (req, res) => {
   try {
     const patinadores = await Patinador.findAll();
     res.json(patinadores);

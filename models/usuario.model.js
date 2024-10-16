@@ -21,7 +21,7 @@ const Usuario = sequelize.define('Usuario', {
     defaultValue: 'patinador'
   }
 });
-
+ 
 // Hash de la contraseña antes de guardar
 Usuario.beforeCreate(async (usuario) => {
   const salt = await bcrypt.genSalt(10);
