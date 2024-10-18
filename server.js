@@ -2,10 +2,13 @@ const patinadoresRoutes = require('./routes/patinadores.router');
 const eventosRoutes = require('./routes/eventos.router');
 const registerRoutes = require('./routes/auth.router');
 const loginRoutes = require('./routes/login.router');
+const elementosRoutes = require('./routes/elementos.router');
+const componentesRoutes = require('./routes/componentes.router');
 const sequelize = require('./config/database');
 const Patinador = require('./models/patinador.model');
 const Evento = require('./models/evento.model');
-
+const Elemento = require('./models/elemento.model')
+const componente = require('./models/componente.models')
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -19,7 +22,7 @@ app.use(cors());
 /**
  * DB
  */
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ alter: true }).then(() => {
     console.log('Base de datos sincronizada con las relaciones');
   });
   
@@ -31,6 +34,8 @@ app.use('/patinadores', patinadoresRoutes);
 app.use('/eventos', eventosRoutes);
 app.use('/register',registerRoutes);
 app.use('/login', loginRoutes);
+app.use('/elementos',elementosRoutes);
+app.use('/componentes', componentesRoutes);
 
 
 app.get('/', (req, res) => {
