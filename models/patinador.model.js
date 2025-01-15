@@ -17,20 +17,8 @@ const Patinador = sequelize.define('Patinador', {
     }
   });
   
-
-
-Patinador.belongsToMany(Evento, { through: 'PatinadorEventos' });
-
-// Function to associate an existing event with a patinador
-Patinador.prototype.addExistingEvento = async function(eventoId) {
-  const evento = await Evento.findByPk(eventoId);
-  if (evento) {
-    await this.addEvento(evento);
-  } else {
-    throw new Error('Evento not found');
-  }
-};
-
+  Patinador.belongsToMany(Evento, { through: 'PatinadorEventos' });
+  Evento.belongsToMany(Patinador, { through: 'PatinadorEventos' });
 
 
 module.exports = Patinador;

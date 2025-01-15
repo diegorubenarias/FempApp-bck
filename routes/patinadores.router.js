@@ -39,7 +39,7 @@ router.post('/:patinadorId/eventos/:eventoId', async (req, res) => {
       return res.status(404).json({ error: 'Patinador o evento no encontrado' });
     }
 
-    await patinador.addExistingEvento(evento);
+    await patinador.AddEvento(evento);
     res.status(200).json({ message: 'Patinador inscrito en el evento exitosamente' });
   } catch (error) {
     res.status(500).json({ error: 'Error al inscribir el patinador en el evento' });
