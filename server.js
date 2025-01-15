@@ -4,6 +4,7 @@ const registerRoutes = require('./routes/auth.router');
 const loginRoutes = require('./routes/login.router');
 const elementosRoutes = require('./routes/elementos.router');
 const componentesRoutes = require('./routes/componentes.router');
+const padronRoutes = require('./routes/padron.router');
 const sequelize = require('./config/database');
 const Patinador = require('./models/patinador.model');
 const Evento = require('./models/evento.model');
@@ -36,6 +37,7 @@ app.use('/register',registerRoutes);
 app.use('/login', loginRoutes);
 app.use('/elementos',elementosRoutes);
 app.use('/componentes', componentesRoutes);
+app.use('/padron', padronRoutes);
 
 
 app.get('/', (req, res) => {

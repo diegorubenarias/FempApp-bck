@@ -1,12 +1,10 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const bcrypt = require('bcryptjs');
+const Padron = require('./padron.model');
 
 const Usuario = sequelize.define('Usuario', {
-  nombre: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+ 
   email: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -16,9 +14,10 @@ const Usuario = sequelize.define('Usuario', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  rol: {
-    type: DataTypes.ENUM('patinador', 'entrenador', 'administrador'),
-    defaultValue: 'patinador'
+
+  dni: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 });
  
