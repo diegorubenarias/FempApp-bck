@@ -18,8 +18,11 @@ const Patinador = sequelize.define('Patinador', {
   });
   
 // Relación muchos a muchos con Eventos
-Patinador.belongsToMany(Evento, { through: 'PatinadorEvento' });
-Evento.belongsToMany(Patinador, { through: 'PatinadorEvento' });
+Patinador.associate = function(models) {
+
+  Patinador.belongsToMany(models.Evento, { through: 'PatinadorEventos' });
+
+};
 
 module.exports = Patinador;
 
