@@ -38,6 +38,7 @@ router.post('/:patinadorId/eventos/:eventoId', async (req, res) => {
       }
   
       await patinador.addEvento(evento);
+      
       res.status(200).json({ message: 'Patinador inscrito en el evento con éxito' });
     } catch (error) {
       res.status(500).json({ error: 'Error al inscribir al patinador en el evento' });
