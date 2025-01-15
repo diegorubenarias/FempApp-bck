@@ -22,9 +22,6 @@ const Evento = sequelize.define('Evento', {
   }
 });
 
-Evento.belongsToMany(Patinador, { through: 'PatinadorEvento' });
-
-
 
 
 module.exports = Evento;
