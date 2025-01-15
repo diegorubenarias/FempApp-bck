@@ -40,6 +40,43 @@ router.get('/:eventoId/patinadores', async (req, res) => {
       res.status(500).json({ error: 'Error al obtener los patinadores del evento' });
     }
   });
-  
+
+  // Obtener un evento por ID
+  router.get('/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const evento = await Evento.findByPk(id);
+
+      if (!evento) {
+        return res.status(404).json({ error: 'Evento no encontrado' });
+      }
+
+      res.json(evento);
+    } catch (error) {
+      res.status(500).json({ error: 'Error al obtener el evento' });
+    }
+  });
+
+  // Actualizar un evento
+  router.put('/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { nombre, fecha, lugar } = req.body;
+      const evento = await Evento.findByPk(id);
+
+      if (!evento) {
+        return res.status(404).json({ error: 'Evento no encontrado' });
+      }
+
+      evento.nombre = nombre;
+      evento.fecha = fecha;
+      evento.lugar = lugar;
+      await evento.save();
+
+      res.json(evento);
+    } catch (error) {
+      res.status(500).json({ error: 'Error al actualizar el evento' });
+    }
+  });
 
 module.exports = router;
