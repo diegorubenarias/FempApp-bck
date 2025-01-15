@@ -25,24 +25,25 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+
 // eventos
 // Inscribir un patinador en un evento
 router.post('/:patinadorId/eventos/:eventoId', async (req, res) => {
-    try {
-      const { patinadorId, eventoId } = req.params;
-      const patinador = await Patinador.findByPk(patinadorId);
-      const evento = await Evento.findByPk(eventoId);
-  
-      if (!patinador || !evento) {
-        return res.status(404).json({ error: 'Patinador o evento no encontrado' });
-      }
-  
-      await patinador.addEvento(evento);
-      
-      res.status(200).json({ message: 'Patinador inscrito en el evento con éxito' });
-    } catch (error) {
-      res.status(500).json({ error: 'Error al inscribir al patinador en el evento' });
+  try {
+    const { patinadorId, eventoId } = req.params;
+    const patinador = await Patinador.findByPk(patinadorId);
+    const evento = await Evento.findByPk(eventoId);
+
+    if (!patinador || !evento) {
+      return res.status(404).json({ error: 'Patinador o evento no encontrado' });
     }
+
+    await patinador.addExistingEvento(evento);
+    res.status(200).json({ message: 'Patinador inscrito en el evento exitosamente' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al inscribir el patinador en el evento' });
+  }
   });
 
 // Obtener todos los eventos a los que un patinador está inscrito
